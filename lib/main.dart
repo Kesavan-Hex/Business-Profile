@@ -448,6 +448,14 @@ class _MyHomePageState extends State<MyHomePage> {
                               ),
                             ),
                           ),
+                          if (chosenLocation != null)
+                            Text(
+                              'Chosen Location: $chosenLocation',
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.black,
+                              ),
+                            ),
                         ],
                       ),
 
