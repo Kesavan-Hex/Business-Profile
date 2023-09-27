@@ -49,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 16), // Spacer
+              SizedBox(height: 70), // Spacer
 
               // General Information Text
               Text(
@@ -116,28 +116,31 @@ class _MyHomePageState extends State<MyHomePage> {
               Expanded(child: SizedBox()),
 
               // Button
-              Container(
-                width: MediaQuery.of(context).size.width *
-                    0.8, // 80% of screen width
-                margin: EdgeInsets.only(
-                    bottom: 20), // Add some space from the bottom
-                child: ElevatedButton(
-                  onPressed: () {
-                    // Add logic to update and save changes here
-                  },
-                  style: ElevatedButton.styleFrom(
-                    primary: Color(0xFF006BCE), // 006BCE color
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
+              Center(
+                child: Container(
+                  width: MediaQuery.of(context).size.width * 0.8,
+                  height: 50, // 80% of screen width
+                  margin: EdgeInsets.only(
+                      bottom: 20), // Add some space from tFhe bottom
+                  child: ElevatedButton(
+                    onPressed: () {
+                      // Add logic to update and save changes here
+                    },
+                    style: ElevatedButton.styleFrom(
+                      primary: Color(0xFF006BCE), // 006BCE color
+                      shape: RoundedRectangleBorder(
+                        borderRadius:
+                            BorderRadius.circular(30), // Rounded button
+                      ),
                     ),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Text(
-                      'Update and Save Changes',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.white,
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Text(
+                        'Update and Save Changes',
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ),
