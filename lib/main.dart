@@ -38,6 +38,8 @@ class _MyHomePageState extends State<MyHomePage> {
   String? businessNameError;
   String? webURLError;
   String? addressError;
+  String? selectedBusinessType;
+  String? chosenLocation;
 
   int _currentSegmentIndex = 0;
 
@@ -313,10 +315,10 @@ class _MyHomePageState extends State<MyHomePage> {
                           Container(
                             decoration: BoxDecoration(
                               border: Border.all(
-                                  color: Color.fromARGB(255, 126, 126, 126),
-                                  width: 2), // Border
-                              borderRadius:
-                                  BorderRadius.circular(8), // Rounded corners
+                                color: Color.fromARGB(255, 126, 126, 126),
+                                width: 2,
+                              ), // Border
+                              borderRadius: BorderRadius.circular(8),
                             ),
                             child: DropdownButton<String>(
                               items: [
@@ -334,8 +336,12 @@ class _MyHomePageState extends State<MyHomePage> {
                                 ),
                               ],
                               onChanged: (String? newValue) {
-                                // Handle dropdown value change here
+                                setState(() {
+                                  selectedBusinessType = newValue;
+                                });
                               },
+                              value:
+                                  selectedBusinessType, // Display selected value
                               hint: Text('Select your business type'),
                               isExpanded: true,
                               underline: Container(), // Remove the underline
@@ -344,7 +350,75 @@ class _MyHomePageState extends State<MyHomePage> {
                           SizedBox(height: 25), // Reduce space
                           ElevatedButton(
                             onPressed: () {
-                              // Handle the button press here
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  String locationText =
+                                      ''; // To store the entered text
+
+                                  return Dialog(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                    ),
+                                    child: Container(
+                                      padding: EdgeInsets.all(16.0),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Text(
+                                            'Add Location',
+                                            style: TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          SizedBox(height: 10),
+                                          TextField(
+                                            onChanged: (value) {
+                                              locationText =
+                                                  value; // Update the entered text
+                                            },
+                                            decoration: InputDecoration(
+                                              hintText: 'Enter location',
+                                              border: OutlineInputBorder(),
+                                            ),
+                                          ),
+                                          SizedBox(height: 10),
+                                          ElevatedButton(
+                                            onPressed: () {
+                                              setState(() {
+                                                chosenLocation = locationText;
+                                              });
+                                              Navigator.of(context)
+                                                  .pop(); // Close the dialog
+                                            },
+                                            style: ElevatedButton.styleFrom(
+                                              primary: Color(
+                                                  0xFF0085FF), // Button color
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0),
+                                              ),
+                                            ),
+                                            child: Text('Choose'),
+                                          ),
+                                          SizedBox(height: 10),
+
+                                          // Display the chosen location
+                                          if (chosenLocation != null)
+                                            Text(
+                                              'Chosen Location: $chosenLocation',
+                                              style: TextStyle(
+                                                fontSize: 16,
+                                                color: Colors.black,
+                                              ),
+                                            ),
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                },
+                              );
                             },
                             style: ElevatedButton.styleFrom(
                               primary: Color(0xFF0085FF), // Button color
