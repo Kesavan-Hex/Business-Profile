@@ -46,6 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   fontSize: 30,
                   color: Colors.black,
                   fontFamily: 'DM Sans',
+                  fontWeight: FontWeight.bold,
                 ),
               ),
               SizedBox(height: 16), // Spacer
@@ -57,13 +58,14 @@ class _MyHomePageState extends State<MyHomePage> {
                   fontSize: 25,
                   color: Colors.black,
                   fontFamily: 'DM Sans',
+                  fontWeight: FontWeight.bold,
                 ),
               ),
               Text(
                 'Enter your business details',
                 style: TextStyle(
                   fontSize: 16,
-                  color: Color(0xFF006BCE), // 006BCE color
+                  color: Colors.black,
                 ),
               ),
 
