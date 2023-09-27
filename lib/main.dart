@@ -33,12 +33,8 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment:
-                CrossAxisAlignment.start, // Align text to the left
+          child: ListView(
             children: <Widget>[
-              SizedBox(height: 32), // Add space at the top
-
               // Custom Heading
               Text(
                 'Profile',
@@ -49,7 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 70), // Spacer
+              SizedBox(height: 60), // Spacer
 
               // General Information Text
               Text(
@@ -69,8 +65,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
 
-              // Text Boxes
-              SizedBox(height: 16),
+              // Text Boxes with space between them
+              SizedBox(height: 18),
               Container(
                 margin: EdgeInsets.symmetric(vertical: 8),
                 child: TextFormField(
@@ -81,6 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
               ),
+              SizedBox(height: 16), // Add space
               Container(
                 margin: EdgeInsets.symmetric(vertical: 8),
                 child: TextFormField(
@@ -91,6 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
               ),
+              SizedBox(height: 16), // Add space
               Container(
                 margin: EdgeInsets.symmetric(vertical: 8),
                 child: TextFormField(
@@ -101,6 +99,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
               ),
+              SizedBox(height: 16), // Add space
               Container(
                 margin: EdgeInsets.symmetric(vertical: 8),
                 child: TextFormField(
@@ -113,40 +112,32 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
 
               // Spacer
-              Expanded(child: SizedBox()),
-
-              // Button
-              Center(
-                child: Container(
-                  width: MediaQuery.of(context).size.width * 0.8,
-                  height: 50, // 80% of screen width
-                  margin: EdgeInsets.only(
-                      bottom: 20), // Add some space from tFhe bottom
-                  child: ElevatedButton(
-                    onPressed: () {
-                      // Add logic to update and save changes here
-                    },
-                    style: ElevatedButton.styleFrom(
-                      primary: Color(0xFF006BCE), // 006BCE color
-                      shape: RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.circular(30), // Rounded button
-                      ),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Text(
-                        'Update and Save Changes',
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+              SizedBox(height: 16), // Add space
             ],
+          ),
+        ),
+      ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: ElevatedButton(
+          onPressed: () {
+            // Add logic to update and save changes here
+          },
+          style: ElevatedButton.styleFrom(
+            primary: Color(0xFF006BCE), // 006BCE color
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30), // Rounded button
+            ),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Text(
+              'Update and Save Changes',
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.white,
+              ),
+            ),
           ),
         ),
       ),
