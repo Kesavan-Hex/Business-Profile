@@ -288,13 +288,12 @@ class _MyHomePageState extends State<MyHomePage> {
                         ],
                       ),
                     // Inside the Content for Business Information segment
-                    // Inside the Content for Business Information segment
                     if (_currentSegmentIndex == 1)
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
-                            'Display Business Information',
+                            'Business Information',
                             style: TextStyle(
                               fontSize: 25,
                               color: Colors.black,
@@ -302,7 +301,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          SizedBox(height: 20), // Reduce space
+                          SizedBox(height: 10), // Reduce space
                           Text(
                             'Select your business type and mark location.',
                             style: TextStyle(
@@ -458,8 +457,29 @@ class _MyHomePageState extends State<MyHomePage> {
                             ),
                         ],
                       ),
-
-                    SizedBox(height: 20),
+                    if (_currentSegmentIndex == 2)
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            'Business Assets',
+                            style: TextStyle(
+                              fontSize: 25,
+                              color: Colors.black,
+                              fontFamily: 'DM Sans',
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                          Text(
+                            'Add Business logo and description',
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.grey,
+                            ),
+                          ),
+                        ],
+                      ),
                   ],
                 ),
               ),
