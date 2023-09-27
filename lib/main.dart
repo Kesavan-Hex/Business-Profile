@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 void main() {
   runApp(const MyApp());
@@ -38,6 +39,15 @@ class _MyHomePageState extends State<MyHomePage> {
   String? webURLError;
   String? addressError;
 
+  int _currentSegmentIndex = 0;
+
+  final List<String> _segmentLabels = [
+    'General Info',
+    'Business Info',
+    'Business Assets',
+    'Business Verification',
+  ];
+
   @override
   void dispose() {
     businessNameController.dispose();
@@ -66,21 +76,16 @@ class _MyHomePageState extends State<MyHomePage> {
       final phoneNumber = phoneNumberController.text;
       if (phoneNumber.isNotEmpty) {
         if (!isValidPhoneNumber(phoneNumber)) {
-          // Phone number is not valid
-          //phoneNumberController.clear(); // Clear the input
-          phoneNumberController.text = ''; // Set it as an empty string
+          phoneNumberController.text = '';
         }
       }
     });
 
     if (_formKey.currentState!.validate()) {
-      // All fields are valid, you can proceed with saving the data.
-      // Add your logic here.
       print('Data can be saved');
     }
   }
 
-  // Function to check if a string is a valid phone number
   bool isValidPhoneNumber(String phoneNumber) {
     final RegExp phoneRegex = RegExp(r'^[0-9]+$');
     return phoneRegex.hasMatch(phoneNumber);
@@ -89,31 +94,39 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Form(
-            key: _formKey,
-            child: ListView(
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
+                SizedBox(height: 35),
                 Row(
                   children: <Widget>[
-                    Container(
-                      width: 25,
-                      height: 25,
-                      margin: EdgeInsets.only(right: 10.0),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Color(0xFF1CADFF),
-                      ),
-                      child: Center(
-                        child: Icon(
-                          Icons.arrow_back_ios_rounded,
-                          color: Colors.white,
-                          size: 24,
+                    GestureDetector(
+                      onTap: () {
+                        // Handle back action based on segment need to be updated
+                      },
+                      child: Container(
+                        width: 25,
+                        height: 25,
+                        margin: EdgeInsets.only(right: 10.0),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Color(0xFF1CADFF),
+                        ),
+                        child: Center(
+                          child: Icon(
+                            Icons.arrow_back_ios_rounded,
+                            color: Colors.white,
+                            size: 24,
+                          ),
                         ),
                       ),
                     ),
+                    SizedBox(width: 8),
                     Text(
                       'Profile',
                       style: TextStyle(
@@ -125,101 +138,146 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ],
                 ),
-
-                SizedBox(height: 60), // Spacer
-
-                Text(
-                  'General Information',
-                  style: TextStyle(
-                    fontSize: 25,
-                    color: Colors.black,
-                    fontFamily: 'DM Sans',
-                    fontWeight: FontWeight.bold,
+                SizedBox(height: 20),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: <Widget>[
+                      for (int i = 0; i < _segmentLabels.length; i++)
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              _currentSegmentIndex = i;
+                            });
+                          },
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                              vertical: 12.0,
+                              horizontal: 20.0,
+                            ),
+                            decoration: BoxDecoration(
+                              border: Border(
+                                bottom: BorderSide(
+                                  color: _currentSegmentIndex == i
+                                      ? Color(0xFF1CADFF)
+                                      : Colors.transparent,
+                                  width: 3.0,
+                                ),
+                              ),
+                            ),
+                            child: Text(
+                              _segmentLabels[i],
+                              style: TextStyle(
+                                color: _currentSegmentIndex == i
+                                    ? Color(0xFF1CADFF)
+                                    : Colors.black,
+                              ),
+                            ),
+                          ),
+                        ),
+                    ],
                   ),
                 ),
-                Text(
-                  'Enter your business details',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.black,
-                  ),
-                ),
-
-                SizedBox(height: 18),
-                Container(
-                  margin: EdgeInsets.symmetric(vertical: 8),
-                  child: TextFormField(
-                    controller: businessNameController,
-                    decoration: InputDecoration(
-                      labelText: 'Business Name',
-                      hintText: 'Burger King',
-                      border: OutlineInputBorder(),
-                      errorText: businessNameError,
-                    ),
-                    validator: (value) {
-                      return businessNameError;
-                    },
-                  ),
-                ),
-                SizedBox(height: 16), // Add space
-                Container(
-                  margin: EdgeInsets.symmetric(vertical: 8),
-                  child: TextFormField(
-                    controller: webURLController,
-                    decoration: InputDecoration(
-                      labelText: 'Web URL',
-                      hintText: 'sourcecoders.in',
-                      border: OutlineInputBorder(),
-                      errorText: webURLError,
-                    ),
-                    validator: (value) {
-                      return webURLError;
-                    },
-                  ),
-                ),
-                SizedBox(height: 16),
-                Container(
-                  margin: EdgeInsets.symmetric(vertical: 8),
-                  child: TextFormField(
-                    controller: addressController,
-                    decoration: InputDecoration(
-                      labelText: 'Address',
-                      hintText: 'Address',
-                      border: OutlineInputBorder(),
-                      errorText: addressError,
-                    ),
-                    validator: (value) {
-                      return addressError;
-                    },
-                  ),
-                ),
-                SizedBox(height: 16),
-                Container(
-                  margin: EdgeInsets.symmetric(vertical: 8),
-                  child: TextFormField(
-                    controller: phoneNumberController,
-                    decoration: InputDecoration(
-                      labelText: 'Phone Number (optional) ',
-                      hintText: 'Phone Number (optional)',
-                      border: OutlineInputBorder(),
-                    ),
-                    validator: (value) {
-                      if (value != null &&
-                          value.isNotEmpty &&
-                          !isValidPhoneNumber(value)) {
-                        return 'Invalid phone number format';
-                      }
-                      return null; // Return null if the phone number is valid or empty
-                    },
-                  ),
-                ),
-
-                // Spacer
-                SizedBox(height: 16), // Add space
               ],
             ),
           ),
-        ),
+          Expanded(
+            child: SingleChildScrollView(
+              padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).viewInsets.bottom + 16.0,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    if (_currentSegmentIndex == 0)
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            'Enter your business details',
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.black,
+                            ),
+                          ),
+                          SizedBox(height: 18),
+                          Container(
+                            margin: EdgeInsets.symmetric(vertical: 8),
+                            child: TextFormField(
+                              controller: businessNameController,
+                              decoration: InputDecoration(
+                                labelText: 'Business Name',
+                                hintText: 'Burger King',
+                                border: OutlineInputBorder(),
+                                errorText: businessNameError,
+                              ),
+                              validator: (value) {
+                                return businessNameError;
+                              },
+                            ),
+                          ),
+                          SizedBox(height: 16),
+                          Container(
+                            margin: EdgeInsets.symmetric(vertical: 8),
+                            child: TextFormField(
+                              controller: webURLController,
+                              decoration: InputDecoration(
+                                labelText: 'Web URL',
+                                hintText: 'burgerking.com',
+                                border: OutlineInputBorder(),
+                                errorText: webURLError,
+                              ),
+                              validator: (value) {
+                                return webURLError;
+                              },
+                            ),
+                          ),
+                          SizedBox(height: 16),
+                          Container(
+                            margin: EdgeInsets.symmetric(vertical: 8),
+                            child: TextFormField(
+                              controller: addressController,
+                              decoration: InputDecoration(
+                                labelText: 'Address',
+                                hintText: 'Address',
+                                border: OutlineInputBorder(),
+                                errorText: addressError,
+                              ),
+                              validator: (value) {
+                                return addressError;
+                              },
+                            ),
+                          ),
+                          SizedBox(height: 16),
+                          Container(
+                            margin: EdgeInsets.symmetric(vertical: 8),
+                            child: TextFormField(
+                              controller: phoneNumberController,
+                              decoration: InputDecoration(
+                                labelText: 'Phone Number (optional) ',
+                                hintText: 'Phone Number (optional)',
+                                border: OutlineInputBorder(),
+                              ),
+                              validator: (value) {
+                                if (value != null &&
+                                    value.isNotEmpty &&
+                                    !isValidPhoneNumber(value)) {
+                                  return 'Invalid phone number format';
+                                }
+                                return null;
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -228,7 +286,7 @@ class _MyHomePageState extends State<MyHomePage> {
           style: ElevatedButton.styleFrom(
             primary: Color(0xFF006BCE),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30), // Rounded button
+              borderRadius: BorderRadius.circular(30),
             ),
           ),
           child: Padding(
