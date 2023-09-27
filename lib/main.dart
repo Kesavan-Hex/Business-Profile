@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Profile',
       theme: ThemeData(
-        primaryColor: Colors.white, // Set the primary color to white
+        primaryColor: Colors.white,
       ),
       home: const MyHomePage(),
     );
@@ -35,19 +35,38 @@ class _MyHomePageState extends State<MyHomePage> {
           padding: const EdgeInsets.all(16.0),
           child: ListView(
             children: <Widget>[
-              // Custom Heading
-              Text(
-                'Profile',
-                style: TextStyle(
-                  fontSize: 30,
-                  color: Colors.black,
-                  fontFamily: 'DM Sans',
-                  fontWeight: FontWeight.bold,
-                ),
+              Row(
+                children: <Widget>[
+                  Container(
+                    width: 25,
+                    height: 25,
+                    margin: EdgeInsets.only(right: 10.0),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Color(0xFF1CADFF),
+                    ),
+                    child: Center(
+                      child: Icon(
+                        Icons.arrow_back_ios_rounded,
+                        color: Colors.white,
+                        size: 24,
+                      ),
+                    ),
+                  ),
+                  Text(
+                    'Profile',
+                    style: TextStyle(
+                      fontSize: 30,
+                      color: Colors.black,
+                      fontFamily: 'DM Sans',
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
               ),
+
               SizedBox(height: 60), // Spacer
 
-              // General Information Text
               Text(
                 'General Information',
                 style: TextStyle(
@@ -65,14 +84,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ),
 
-              // Text Boxes with space between them
               SizedBox(height: 18),
               Container(
                 margin: EdgeInsets.symmetric(vertical: 8),
                 child: TextFormField(
                   decoration: InputDecoration(
-                    labelText: 'First Name',
-                    hintText: 'Enter your first name',
+                    labelText: 'Burger King',
+                    hintText: 'Business Name',
                     border: OutlineInputBorder(),
                   ),
                 ),
@@ -82,30 +100,30 @@ class _MyHomePageState extends State<MyHomePage> {
                 margin: EdgeInsets.symmetric(vertical: 8),
                 child: TextFormField(
                   decoration: InputDecoration(
-                    labelText: 'Last Name',
-                    hintText: 'Enter your last name',
+                    labelText: 'www.burgerking.in',
+                    hintText: 'Web URL',
                     border: OutlineInputBorder(),
                   ),
                 ),
               ),
-              SizedBox(height: 16), // Add space
+              SizedBox(height: 16),
               Container(
                 margin: EdgeInsets.symmetric(vertical: 8),
                 child: TextFormField(
                   decoration: InputDecoration(
-                    labelText: 'Email',
-                    hintText: 'Enter your email',
+                    labelText: 'Address',
+                    hintText: 'Address',
                     border: OutlineInputBorder(),
                   ),
                 ),
               ),
-              SizedBox(height: 16), // Add space
+              SizedBox(height: 16),
               Container(
                 margin: EdgeInsets.symmetric(vertical: 8),
                 child: TextFormField(
                   decoration: InputDecoration(
-                    labelText: 'Phone',
-                    hintText: 'Enter your phone number',
+                    labelText: 'Phone Number (optional)',
+                    hintText: 'Phone Number',
                     border: OutlineInputBorder(),
                   ),
                 ),
@@ -120,11 +138,9 @@ class _MyHomePageState extends State<MyHomePage> {
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(16.0),
         child: ElevatedButton(
-          onPressed: () {
-            // Add logic to update and save changes here
-          },
+          onPressed: () {},
           style: ElevatedButton.styleFrom(
-            primary: Color(0xFF006BCE), // 006BCE color
+            primary: Color(0xFF006BCE),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30), // Rounded button
             ),
