@@ -562,6 +562,30 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                         ],
                       ),
+                    if (_currentSegmentIndex == 3)
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            'Business Verfication',
+                            style: TextStyle(
+                              fontSize: 25,
+                              color: Colors.black,
+                              fontFamily: 'DM Sans',
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                          Text(
+                            'Add social media links for better reach',
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.grey,
+                            ),
+                          ),
+                          SizedBox(height: 18),
+                        ],
+                      ),
                   ],
                 ),
               ),
