@@ -1,4 +1,6 @@
+import 'dart:convert';
 import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -16,16 +18,41 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.white,
       ),
-      home: const MyHomePage(),
+      home: MyHomePage(),
     );
   }
 }
 
+class BusinessProfile {
+  String? businessName;
+  String? webURL;
+  String? address;
+  String? phoneNumber;
+  String? businessType;
+  String? location;
+  File? logoImage;
+  String? description;
+  List<String> socialMediaLinks = [];
+
+  Map<String, dynamic> toJson() {
+    return {
+      'businessName': businessName,
+      'webURL': webURL,
+      'address': address,
+      'phoneNumber': phoneNumber,
+      'businessType': businessType,
+      'location': location,
+      'description': description,
+      'socialMediaLinks': socialMediaLinks,
+    };
+  }
+}
+
 class MyHomePage extends StatefulWidget {
-  const MyHomePage();
+  MyHomePage({Key? key}) : super(key: key);
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
@@ -33,6 +60,13 @@ class _MyHomePageState extends State<MyHomePage> {
   final TextEditingController webURLController = TextEditingController();
   final TextEditingController addressController = TextEditingController();
   final TextEditingController phoneNumberController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
+  final TextEditingController instagramLinkController = TextEditingController();
+  final TextEditingController linkedInLinkController = TextEditingController();
+  final TextEditingController facebookLinkController = TextEditingController();
+  final TextEditingController twitterLinkController = TextEditingController();
+  final TextEditingController youtubeLinkController = TextEditingController();
+
   File? _logoImage;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -54,6 +88,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   // Dropdown value
   String? _selectedBusinessType;
+
+  BusinessProfile businessProfile = BusinessProfile();
 
   @override
   void dispose() {
@@ -99,18 +135,31 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _saveGeneralInfo() {
-    // Save General Info data here
-    print('Saved General Info');
+    businessProfile.businessName = businessNameController.text;
+    businessProfile.webURL = webURLController.text;
+    businessProfile.address = addressController.text;
+    businessProfile.phoneNumber = phoneNumberController.text;
+    _moveToNextScreen();
+  }
+
+  void _moveToNextScreen() {
+    if (_currentSegmentIndex < _segmentLabels.length - 1) {
+      setState(() {
+        _currentSegmentIndex++;
+      });
+    }
   }
 
   void _saveBusinessInfo() {
-    // Save Business Info data here
-    print('Saved Business Info');
+    businessProfile.businessType = selectedBusinessType;
+    businessProfile.location = chosenLocation;
+    _moveToNextScreen();
   }
 
   void _saveBusinessAssets() {
-    // Save Business Assets data here
-    print('Saved Business Assets');
+    businessProfile.logoImage = _logoImage;
+    businessProfile.description = descriptionController.text;
+    _moveToNextScreen();
   }
 
   void _updateAndSaveChanges() {
@@ -307,9 +356,9 @@ class _MyHomePageState extends State<MyHomePage> {
                               },
                             ),
                           ),
+                          SizedBox(height: 16),
                         ],
                       ),
-                    // Inside the Content for Business Information segment
                     if (_currentSegmentIndex == 1)
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -470,9 +519,9 @@ class _MyHomePageState extends State<MyHomePage> {
                                 color: Colors.black,
                               ),
                             ),
+                          SizedBox(height: 20),
                         ],
                       ),
-                    // Inside the Content for Business Assets segment
                     if (_currentSegmentIndex == 2)
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -558,6 +607,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           SizedBox(height: 20),
                           TextFormField(
                             maxLines: 4,
+                            controller: descriptionController,
                             decoration: InputDecoration(
                               labelText: 'Description',
                               hintText: 'Enter your business description...',
@@ -567,9 +617,9 @@ class _MyHomePageState extends State<MyHomePage> {
                               // Handle the entered description text here
                             },
                           ),
+                          SizedBox(height: 20),
                         ],
                       ),
-                    // Inside the Content for Business Verification segment
                     if (_currentSegmentIndex == 3)
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -595,6 +645,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           Container(
                             margin: EdgeInsets.symmetric(vertical: 12),
                             child: TextFormField(
+                              controller: instagramLinkController,
                               decoration: InputDecoration(
                                 labelText: 'Instagram Link (Optional)',
                                 hintText: 'https://www.instagram.com/',
@@ -607,6 +658,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           Container(
                             margin: EdgeInsets.symmetric(vertical: 12),
                             child: TextFormField(
+                              controller: linkedInLinkController,
                               decoration: InputDecoration(
                                 labelText: 'LinkedIn Link (Optional)',
                                 hintText: 'https://www.linkedin.com/in/',
@@ -619,6 +671,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           Container(
                             margin: EdgeInsets.symmetric(vertical: 12),
                             child: TextFormField(
+                              controller: facebookLinkController,
                               decoration: InputDecoration(
                                 labelText: 'Facebook Link (Optional)',
                                 hintText: 'https://www.facebook.com/',
@@ -631,6 +684,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           Container(
                             margin: EdgeInsets.symmetric(vertical: 12),
                             child: TextFormField(
+                              controller: twitterLinkController,
                               decoration: InputDecoration(
                                 labelText: 'Twitter Link (Optional)',
                                 hintText: 'https://twitter.com/',
@@ -643,6 +697,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           Container(
                             margin: EdgeInsets.symmetric(vertical: 12),
                             child: TextFormField(
+                              controller: youtubeLinkController,
                               decoration: InputDecoration(
                                 labelText: 'YouTube Link (Optional)',
                                 hintText: 'https://www.youtube.com/',
@@ -651,6 +706,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               // Handle YouTube link here
                             ),
                           ),
+                          SizedBox(height: 20),
                         ],
                       ),
                   ],
@@ -669,6 +725,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: ElevatedButton(
                   onPressed: () {
                     _saveGeneralInfo();
+                    _logDataInJson(businessProfile);
                   },
                   style: ElevatedButton.styleFrom(
                     primary: Color(0xFF006BCE),
@@ -741,6 +798,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: ElevatedButton(
                   onPressed: () {
                     _updateAndSaveChanges();
+                    _logDataInJson(businessProfile);
                   },
                   style: ElevatedButton.styleFrom(
                     primary: Color(0xFF006BCE),
@@ -764,5 +822,18 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
     );
+  }
+
+  void _logDataInJson(BusinessProfile businessProfile) {
+    businessProfile.socialMediaLinks = {
+      "instagram": instagramLinkController.text,
+      "linkedin": linkedInLinkController.text,
+      "facebook": facebookLinkController.text,
+      "twitter": twitterLinkController.text,
+      "youtube": youtubeLinkController.text,
+    };
+
+    final jsonData = json.encode(businessProfile.toJson());
+    print(jsonData);
   }
 }
