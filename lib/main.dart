@@ -825,14 +825,6 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _logDataInJson(BusinessProfile businessProfile) {
-    businessProfile.socialMediaLinks = {
-      "instagram": instagramLinkController.text,
-      "linkedin": linkedInLinkController.text,
-      "facebook": facebookLinkController.text,
-      "twitter": twitterLinkController.text,
-      "youtube": youtubeLinkController.text,
-    };
-
     final jsonData = json.encode(businessProfile.toJson());
     print(jsonData);
   }
