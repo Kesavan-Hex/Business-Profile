@@ -220,7 +220,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       onTap: () {
                         if (_currentSegmentIndex == 0) {
                           // If in the "General Info" segment, close the app
-                          Navigator.of(context).pop();
+                          // Navigator.of(context).pop();
                         } else {
                           // Otherwise, go to the previous segment
                           setState(() {
@@ -354,7 +354,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               controller: webURLController,
                               decoration: InputDecoration(
                                 labelText: 'Web URL',
-                                hintText: 'sourcecoders.in',
+                                hintText: 'google.in',
                                 border: OutlineInputBorder(),
                                 errorText: webURLError,
                               ),
