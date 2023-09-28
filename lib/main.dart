@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -164,7 +163,16 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _updateAndSaveChanges() {
     // Save all changes and update here
-    print('Updated and Saved Changes');
+    businessProfile.socialMediaLinks = [
+      instagramLinkController.text,
+      linkedInLinkController.text,
+      facebookLinkController.text,
+      twitterLinkController.text,
+      youtubeLinkController.text,
+    ];
+
+    // Log the updated businessProfile
+    _logDataInJson(businessProfile);
   }
 
   @override
