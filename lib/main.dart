@@ -1,5 +1,6 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:image_picker/image_picker.dart';
 
 void main() {
   runApp(const MyApp());
@@ -32,6 +33,7 @@ class _MyHomePageState extends State<MyHomePage> {
   final TextEditingController webURLController = TextEditingController();
   final TextEditingController addressController = TextEditingController();
   final TextEditingController phoneNumberController = TextEditingController();
+  File? _logoImage;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -477,6 +479,70 @@ class _MyHomePageState extends State<MyHomePage> {
                               fontSize: 16,
                               color: Colors.grey,
                             ),
+                          ),
+                          SizedBox(height: 20),
+
+                          // Widget to display the inserted business logo
+                          Container(
+                            width: double
+                                .infinity, // Set width to fill the screen width
+                            height:
+                                200, // Set a fixed height for the logo display
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color:
+                                    Colors.grey, // Add a border around the logo
+                              ),
+                            ),
+                            child: _logoImage != null
+                                ? Image.file(_logoImage!, fit: BoxFit.cover)
+                                : Placeholder(), // Use a placeholder image if no logo is selected
+                          ),
+
+                          SizedBox(height: 20),
+
+                          // Button to insert a business logo
+                          ElevatedButton(
+                            onPressed: () async {
+                              final picker = ImagePicker();
+                              final pickedFile = await ImagePicker()
+                                  .pickImage(source: ImageSource.gallery);
+
+                              if (pickedFile != null) {
+                                // Update the displayed image with the selected image
+                                setState(() {
+                                  _logoImage = File(pickedFile.path);
+                                });
+                              }
+                            },
+                            style: ElevatedButton.styleFrom(
+                              primary: Color(0xFF0085FF), // Button color
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              minimumSize: Size(double.infinity,
+                                  50), // Set minimum button width and height
+                            ),
+                            child: Text(
+                              'Insert Business Logo',
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+
+                          SizedBox(height: 20),
+
+                          // Multiline description text box
+                          TextFormField(
+                            maxLines: 4, // Allow for up to 4 lines of text
+                            decoration: InputDecoration(
+                              labelText: 'Description',
+                              hintText: 'Enter your business description...',
+                              border: OutlineInputBorder(),
+                            ),
+                            // Handle the entered description text here
                           ),
                         ],
                       ),
