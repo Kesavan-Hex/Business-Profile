@@ -98,6 +98,26 @@ class _MyHomePageState extends State<MyHomePage> {
     return phoneRegex.hasMatch(phoneNumber);
   }
 
+  void _saveGeneralInfo() {
+    // Save General Info data here
+    print('Saved General Info');
+  }
+
+  void _saveBusinessInfo() {
+    // Save Business Info data here
+    print('Saved Business Info');
+  }
+
+  void _saveBusinessAssets() {
+    // Save Business Assets data here
+    print('Saved Business Assets');
+  }
+
+  void _updateAndSaveChanges() {
+    // Save all changes and update here
+    print('Updated and Saved Changes');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -303,7 +323,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          SizedBox(height: 10), // Reduce space
+                          SizedBox(height: 10),
                           Text(
                             'Select your business type and mark location.',
                             style: TextStyle(
@@ -312,13 +332,13 @@ class _MyHomePageState extends State<MyHomePage> {
                               fontFamily: 'DM Sans',
                             ),
                           ),
-                          SizedBox(height: 20), // Reduce space
+                          SizedBox(height: 20),
                           Container(
                             decoration: BoxDecoration(
                               border: Border.all(
                                 color: Color.fromARGB(255, 126, 126, 126),
                                 width: 2,
-                              ), // Border
+                              ),
                               borderRadius: BorderRadius.circular(8),
                             ),
                             child: DropdownButton<String>(
@@ -341,21 +361,19 @@ class _MyHomePageState extends State<MyHomePage> {
                                   selectedBusinessType = newValue;
                                 });
                               },
-                              value:
-                                  selectedBusinessType, // Display selected value
+                              value: selectedBusinessType,
                               hint: Text('Select your business type'),
                               isExpanded: true,
-                              underline: Container(), // Remove the underline
+                              underline: Container(),
                             ),
                           ),
-                          SizedBox(height: 25), // Reduce space
+                          SizedBox(height: 25),
                           ElevatedButton(
                             onPressed: () {
                               showDialog(
                                 context: context,
                                 builder: (BuildContext context) {
-                                  String locationText =
-                                      ''; // To store the entered text
+                                  String locationText = '';
 
                                   return Dialog(
                                     shape: RoundedRectangleBorder(
@@ -376,8 +394,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                           SizedBox(height: 10),
                                           TextField(
                                             onChanged: (value) {
-                                              locationText =
-                                                  value; // Update the entered text
+                                              locationText = value;
                                             },
                                             decoration: InputDecoration(
                                               hintText: 'Enter location',
@@ -390,12 +407,10 @@ class _MyHomePageState extends State<MyHomePage> {
                                               setState(() {
                                                 chosenLocation = locationText;
                                               });
-                                              Navigator.of(context)
-                                                  .pop(); // Close the dialog
+                                              Navigator.of(context).pop();
                                             },
                                             style: ElevatedButton.styleFrom(
-                                              primary: Color(
-                                                  0xFF0085FF), // Button color
+                                              primary: Color(0xFF0085FF),
                                               shape: RoundedRectangleBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(8.0),
@@ -404,8 +419,6 @@ class _MyHomePageState extends State<MyHomePage> {
                                             child: Text('Choose'),
                                           ),
                                           SizedBox(height: 10),
-
-                                          // Display the chosen location
                                           if (chosenLocation != null)
                                             Text(
                                               'Chosen Location: $chosenLocation',
@@ -422,7 +435,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               );
                             },
                             style: ElevatedButton.styleFrom(
-                              primary: Color(0xFF0085FF), // Button color
+                              primary: Color(0xFF0085FF),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(8),
                               ),
@@ -437,7 +450,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                     color: Colors.white,
                                     size: 24,
                                   ),
-                                  SizedBox(width: 8), // Add space
+                                  SizedBox(width: 8),
                                   Text(
                                     'Add Location',
                                     style: TextStyle(
@@ -482,28 +495,25 @@ class _MyHomePageState extends State<MyHomePage> {
                             ),
                           ),
                           SizedBox(height: 20),
-
-                          // Button to insert a business logo with increased size
                           ElevatedButton(
                             onPressed: () async {
                               final picker = ImagePicker();
                               final pickedFile = await picker.pickImage(
-                                  source: ImageSource.gallery);
+                                source: ImageSource.gallery,
+                              );
 
                               if (pickedFile != null) {
-                                // Update the displayed image with the selected image
                                 setState(() {
                                   _logoImage = File(pickedFile.path);
                                 });
                               }
                             },
                             style: ElevatedButton.styleFrom(
-                              primary: Color(0xFF0085FF), // Button color
+                              primary: Color(0xFF0085FF),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(8),
                               ),
-                              minimumSize: Size(double.infinity,
-                                  50), // Increase the button size
+                              minimumSize: Size(double.infinity, 50),
                             ),
                             child: Padding(
                               padding: const EdgeInsets.all(16.0),
@@ -516,10 +526,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               ),
                             ),
                           ),
-
                           SizedBox(height: 20),
-
-                          // Display the inserted business logo if available
                           if (_logoImage != null)
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -534,35 +541,34 @@ class _MyHomePageState extends State<MyHomePage> {
                                 ),
                                 SizedBox(height: 10),
                                 Container(
-                                  width: 75, // Set width to 75
-                                  height: 75, // Set height to 75
+                                  width: 75,
+                                  height: 75,
                                   decoration: BoxDecoration(
                                     border: Border.all(
-                                      color: Colors
-                                          .grey, // Add a border around the image
+                                      color: Colors.grey,
                                     ),
                                   ),
-                                  child: Image.file(_logoImage!,
-                                      fit: BoxFit.cover),
+                                  child: Image.file(
+                                    _logoImage!,
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                               ],
                             ),
-
                           SizedBox(height: 20),
-
-                          // Multiline description text box
                           TextFormField(
-                            maxLines: 4, // Allow for up to 4 lines of text
+                            maxLines: 4,
                             decoration: InputDecoration(
                               labelText: 'Description',
                               hintText: 'Enter your business description...',
                               border: OutlineInputBorder(),
                             ),
-                            // Handle the entered description text here
+                            onChanged: (value) {
+                              // Handle the entered description text here
+                            },
                           ),
                         ],
                       ),
-                    // Inside the Content for Business Verification segment
                     // Inside the Content for Business Verification segment
                     if (_currentSegmentIndex == 3)
                       Column(
@@ -586,11 +592,8 @@ class _MyHomePageState extends State<MyHomePage> {
                             ),
                           ),
                           SizedBox(height: 18),
-
-                          // Instagram Link Text Field
                           Container(
-                            margin: EdgeInsets.symmetric(
-                                vertical: 12), // Increased space
+                            margin: EdgeInsets.symmetric(vertical: 12),
                             child: TextFormField(
                               decoration: InputDecoration(
                                 labelText: 'Instagram Link (Optional)',
@@ -600,13 +603,9 @@ class _MyHomePageState extends State<MyHomePage> {
                               // Handle Instagram link here
                             ),
                           ),
-
-                          SizedBox(height: 12), // Increased space
-
-                          // LinkedIn Link Text Field
+                          SizedBox(height: 12),
                           Container(
-                            margin: EdgeInsets.symmetric(
-                                vertical: 12), // Increased space
+                            margin: EdgeInsets.symmetric(vertical: 12),
                             child: TextFormField(
                               decoration: InputDecoration(
                                 labelText: 'LinkedIn Link (Optional)',
@@ -616,13 +615,9 @@ class _MyHomePageState extends State<MyHomePage> {
                               // Handle LinkedIn link here
                             ),
                           ),
-
-                          SizedBox(height: 12), // Increased space
-
-                          // Facebook Link Text Field
+                          SizedBox(height: 12),
                           Container(
-                            margin: EdgeInsets.symmetric(
-                                vertical: 12), // Increased space
+                            margin: EdgeInsets.symmetric(vertical: 12),
                             child: TextFormField(
                               decoration: InputDecoration(
                                 labelText: 'Facebook Link (Optional)',
@@ -632,13 +627,9 @@ class _MyHomePageState extends State<MyHomePage> {
                               // Handle Facebook link here
                             ),
                           ),
-
-                          SizedBox(height: 12), // Increased space
-
-                          // Twitter Link Text Field
+                          SizedBox(height: 12),
                           Container(
-                            margin: EdgeInsets.symmetric(
-                                vertical: 12), // Increased space
+                            margin: EdgeInsets.symmetric(vertical: 12),
                             child: TextFormField(
                               decoration: InputDecoration(
                                 labelText: 'Twitter Link (Optional)',
@@ -648,13 +639,9 @@ class _MyHomePageState extends State<MyHomePage> {
                               // Handle Twitter link here
                             ),
                           ),
-
-                          SizedBox(height: 12), // Increased space
-
-                          // YouTube Link Text Field
+                          SizedBox(height: 12),
                           Container(
-                            margin: EdgeInsets.symmetric(
-                                vertical: 12), // Increased space
+                            margin: EdgeInsets.symmetric(vertical: 12),
                             child: TextFormField(
                               decoration: InputDecoration(
                                 labelText: 'YouTube Link (Optional)',
@@ -675,24 +662,105 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: ElevatedButton(
-          onPressed: _validateFields,
-          style: ElevatedButton.styleFrom(
-            primary: Color(0xFF006BCE),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30),
-            ),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Text(
-              'Update and Save Changes',
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.white,
+        child: Row(
+          children: [
+            if (_currentSegmentIndex == 0)
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () {
+                    _saveGeneralInfo();
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: Color(0xFF006BCE),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Text(
+                      'Save General Info',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
               ),
-            ),
-          ),
+            if (_currentSegmentIndex == 1)
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () {
+                    _saveBusinessInfo();
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: Color(0xFF006BCE),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Text(
+                      'Save Business Info',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            if (_currentSegmentIndex == 2)
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () {
+                    _saveBusinessAssets();
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: Color(0xFF006BCE),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Text(
+                      'Save Business Assets',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            if (_currentSegmentIndex == 3)
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () {
+                    _updateAndSaveChanges();
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: Color(0xFF006BCE),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Text(
+                      'Update and Save Changes',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+          ],
         ),
       ),
     );
