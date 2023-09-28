@@ -218,7 +218,15 @@ class _MyHomePageState extends State<MyHomePage> {
                   children: <Widget>[
                     GestureDetector(
                       onTap: () {
-                        // Handle back button press here
+                        if (_currentSegmentIndex == 0) {
+                          // If in the "General Info" segment, close the app
+                          Navigator.of(context).pop();
+                        } else {
+                          // Otherwise, go to the previous segment
+                          setState(() {
+                            _currentSegmentIndex--;
+                          });
+                        }
                       },
                       child: Container(
                         width: 25,
