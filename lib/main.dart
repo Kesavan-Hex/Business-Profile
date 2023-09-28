@@ -133,6 +133,29 @@ class _MyHomePageState extends State<MyHomePage> {
     return phoneRegex.hasMatch(phoneNumber);
   }
 
+//Dialog to show the json data
+  void _showJsonDialog(String jsonData) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Business Profile JSON"),
+          content: SingleChildScrollView(
+            child: Text(jsonData),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text("Close"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   void _saveGeneralInfo() {
     businessProfile.businessName = businessNameController.text;
     businessProfile.webURL = webURLController.text;
@@ -172,7 +195,11 @@ class _MyHomePageState extends State<MyHomePage> {
     ];
 
     // Log the updated businessProfile
-    _logDataInJson(businessProfile);
+    final jsonData = json.encode(businessProfile.toJson());
+    print(jsonData);
+
+    // Show the JSON data in a dialog
+    _showJsonDialog(jsonData);
   }
 
   @override
