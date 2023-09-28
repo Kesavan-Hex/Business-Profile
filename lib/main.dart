@@ -562,12 +562,14 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                         ],
                       ),
+                    // Inside the Content for Business Verification segment
+                    // Inside the Content for Business Verification segment
                     if (_currentSegmentIndex == 3)
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
-                            'Business Verfication',
+                            'Business Verification',
                             style: TextStyle(
                               fontSize: 25,
                               color: Colors.black,
@@ -584,6 +586,84 @@ class _MyHomePageState extends State<MyHomePage> {
                             ),
                           ),
                           SizedBox(height: 18),
+
+                          // Instagram Link Text Field
+                          Container(
+                            margin: EdgeInsets.symmetric(
+                                vertical: 12), // Increased space
+                            child: TextFormField(
+                              decoration: InputDecoration(
+                                labelText: 'Instagram Link (Optional)',
+                                hintText: 'https://www.instagram.com/',
+                                border: OutlineInputBorder(),
+                              ),
+                              // Handle Instagram link here
+                            ),
+                          ),
+
+                          SizedBox(height: 12), // Increased space
+
+                          // LinkedIn Link Text Field
+                          Container(
+                            margin: EdgeInsets.symmetric(
+                                vertical: 12), // Increased space
+                            child: TextFormField(
+                              decoration: InputDecoration(
+                                labelText: 'LinkedIn Link (Optional)',
+                                hintText: 'https://www.linkedin.com/in/',
+                                border: OutlineInputBorder(),
+                              ),
+                              // Handle LinkedIn link here
+                            ),
+                          ),
+
+                          SizedBox(height: 12), // Increased space
+
+                          // Facebook Link Text Field
+                          Container(
+                            margin: EdgeInsets.symmetric(
+                                vertical: 12), // Increased space
+                            child: TextFormField(
+                              decoration: InputDecoration(
+                                labelText: 'Facebook Link (Optional)',
+                                hintText: 'https://www.facebook.com/',
+                                border: OutlineInputBorder(),
+                              ),
+                              // Handle Facebook link here
+                            ),
+                          ),
+
+                          SizedBox(height: 12), // Increased space
+
+                          // Twitter Link Text Field
+                          Container(
+                            margin: EdgeInsets.symmetric(
+                                vertical: 12), // Increased space
+                            child: TextFormField(
+                              decoration: InputDecoration(
+                                labelText: 'Twitter Link (Optional)',
+                                hintText: 'https://twitter.com/',
+                                border: OutlineInputBorder(),
+                              ),
+                              // Handle Twitter link here
+                            ),
+                          ),
+
+                          SizedBox(height: 12), // Increased space
+
+                          // YouTube Link Text Field
+                          Container(
+                            margin: EdgeInsets.symmetric(
+                                vertical: 12), // Increased space
+                            child: TextFormField(
+                              decoration: InputDecoration(
+                                labelText: 'YouTube Link (Optional)',
+                                hintText: 'https://www.youtube.com/',
+                                border: OutlineInputBorder(),
+                              ),
+                              // Handle YouTube link here
+                            ),
+                          ),
                         ],
                       ),
                   ],
