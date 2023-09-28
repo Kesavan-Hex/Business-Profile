@@ -1,16 +1,30 @@
-# swazei
+# Swazei Task
 
-A new Flutter project.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## Getting Started
+## Overview
 
-This project is a starting point for a Flutter application.
+Simple App That Uses segmented screen and image picker and conver user input into json
 
-A few resources to get you started if this is your first Flutter project:
+## Screenshots
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+<img src="screenshot/photo_2023-09-28_15-51-33.jpg" width="400" height="900">
+<img src="screenshot/photo_2023-09-28_15-51-44.jpg" width="400" height="900">
+<img src="screenshot/photo_2023-09-28_15-51-52.jpg" width="400" height="900">
+<img src="screenshot/photo_2023-09-28_15-51-56.jpg" width="400" height="900">
+<img src="screenshot/photo_2023-09-28_15-51-59.jpg" width="400" height="900">
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+## Installation
+
+```shell
+# Clone the repository
+git clone https://github.com/your-username/your-repo.git](https://github.com/Kesavan-Hex/Swazei-Task.git
+
+# Navigate to the project directory
+
+# Install dependencies
+flutter pub get
+
+# Run the app
+flutter run
