@@ -459,6 +459,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             ),
                         ],
                       ),
+                    // Inside the Content for Business Assets segment
                     if (_currentSegmentIndex == 2)
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -482,31 +483,12 @@ class _MyHomePageState extends State<MyHomePage> {
                           ),
                           SizedBox(height: 20),
 
-                          // Widget to display the inserted business logo
-                          Container(
-                            width: double
-                                .infinity, // Set width to fill the screen width
-                            height:
-                                200, // Set a fixed height for the logo display
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                color:
-                                    Colors.grey, // Add a border around the logo
-                              ),
-                            ),
-                            child: _logoImage != null
-                                ? Image.file(_logoImage!, fit: BoxFit.cover)
-                                : Placeholder(), // Use a placeholder image if no logo is selected
-                          ),
-
-                          SizedBox(height: 20),
-
-                          // Button to insert a business logo
+                          // Button to insert a business logo with increased size
                           ElevatedButton(
                             onPressed: () async {
                               final picker = ImagePicker();
-                              final pickedFile = await ImagePicker()
-                                  .pickImage(source: ImageSource.gallery);
+                              final pickedFile = await picker.pickImage(
+                                  source: ImageSource.gallery);
 
                               if (pickedFile != null) {
                                 // Update the displayed image with the selected image
@@ -521,16 +503,50 @@ class _MyHomePageState extends State<MyHomePage> {
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               minimumSize: Size(double.infinity,
-                                  50), // Set minimum button width and height
+                                  50), // Increase the button size
                             ),
-                            child: Text(
-                              'Insert Business Logo',
-                              style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.white,
+                            child: Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Text(
+                                'Insert Business Logo',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
                           ),
+
+                          SizedBox(height: 20),
+
+                          // Display the inserted business logo if available
+                          if (_logoImage != null)
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Business Logo',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                SizedBox(height: 10),
+                                Container(
+                                  width: 75, // Set width to 75
+                                  height: 75, // Set height to 75
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      color: Colors
+                                          .grey, // Add a border around the image
+                                    ),
+                                  ),
+                                  child: Image.file(_logoImage!,
+                                      fit: BoxFit.cover),
+                                ),
+                              ],
+                            ),
 
                           SizedBox(height: 20),
 
