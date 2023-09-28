@@ -157,11 +157,14 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void _saveGeneralInfo() {
-    businessProfile.businessName = businessNameController.text;
-    businessProfile.webURL = webURLController.text;
-    businessProfile.address = addressController.text;
-    businessProfile.phoneNumber = phoneNumberController.text;
-    _moveToNextScreen();
+    final form = _formKey.currentState;
+    if (form != null && form.validate()) {
+      businessProfile.businessName = businessNameController.text;
+      businessProfile.webURL = webURLController.text;
+      businessProfile.address = addressController.text;
+      businessProfile.phoneNumber = phoneNumberController.text;
+      _moveToNextScreen();
+    }
   }
 
   void _moveToNextScreen() {
@@ -311,96 +314,109 @@ class _MyHomePageState extends State<MyHomePage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     if (_currentSegmentIndex == 0)
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            'General Information',
-                            style: TextStyle(
-                              fontSize: 25,
-                              color: Colors.black,
-                              fontFamily: 'DM Sans',
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          SizedBox(height: 10),
-                          Text(
-                            'Enter your business details',
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.grey,
-                            ),
-                          ),
-                          SizedBox(height: 18),
-                          Container(
-                            margin: EdgeInsets.symmetric(vertical: 8),
-                            child: TextFormField(
-                              controller: businessNameController,
-                              decoration: InputDecoration(
-                                labelText: 'Business Name',
-                                hintText: 'Burger King',
-                                border: OutlineInputBorder(),
-                                errorText: businessNameError,
+                      Form(
+                        key: _formKey, // Associate the Form with _formKey
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Text(
+                              'General Information',
+                              style: TextStyle(
+                                fontSize: 25,
+                                color: Colors.black,
+                                fontFamily: 'DM Sans',
+                                fontWeight: FontWeight.bold,
                               ),
-                              validator: (value) {
-                                return businessNameError;
-                              },
                             ),
-                          ),
-                          SizedBox(height: 16),
-                          Container(
-                            margin: EdgeInsets.symmetric(vertical: 8),
-                            child: TextFormField(
-                              controller: webURLController,
-                              decoration: InputDecoration(
-                                labelText: 'Web URL',
-                                hintText: 'google.in',
-                                border: OutlineInputBorder(),
-                                errorText: webURLError,
+                            SizedBox(height: 10),
+                            Text(
+                              'Enter your business details',
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.grey,
                               ),
-                              validator: (value) {
-                                return webURLError;
-                              },
                             ),
-                          ),
-                          SizedBox(height: 16),
-                          Container(
-                            margin: EdgeInsets.symmetric(vertical: 8),
-                            child: TextFormField(
-                              controller: addressController,
-                              decoration: InputDecoration(
-                                labelText: 'Address',
-                                hintText: 'Address',
-                                border: OutlineInputBorder(),
-                                errorText: addressError,
+                            SizedBox(height: 18),
+                            Container(
+                              margin: EdgeInsets.symmetric(vertical: 8),
+                              child: TextFormField(
+                                controller: businessNameController,
+                                decoration: InputDecoration(
+                                  labelText: 'Business Name',
+                                  hintText: 'Burger King',
+                                  border: OutlineInputBorder(),
+                                ),
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Business Name is required';
+                                  }
+                                  return null; // Return null if the input is valid
+                                },
                               ),
-                              validator: (value) {
-                                return addressError;
-                              },
                             ),
-                          ),
-                          SizedBox(height: 16),
-                          Container(
-                            margin: EdgeInsets.symmetric(vertical: 8),
-                            child: TextFormField(
-                              controller: phoneNumberController,
-                              decoration: InputDecoration(
-                                labelText: 'Phone Number (optional) ',
-                                hintText: 'Phone Number (optional)',
-                                border: OutlineInputBorder(),
+                            SizedBox(height: 16),
+                            Container(
+                              margin: EdgeInsets.symmetric(vertical: 8),
+                              child: TextFormField(
+                                controller: webURLController,
+                                decoration: InputDecoration(
+                                  labelText: 'Web URL',
+                                  hintText: 'google.in',
+                                  border: OutlineInputBorder(),
+                                  errorText: webURLError,
+                                ),
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Web URL is required';
+                                  }
+                                  return null; // Return null if the input is valid
+                                },
                               ),
-                              validator: (value) {
-                                if (value != null &&
-                                    value.isNotEmpty &&
-                                    !isValidPhoneNumber(value)) {
-                                  return 'Invalid phone number format';
-                                }
-                                return null;
-                              },
                             ),
-                          ),
-                          SizedBox(height: 16),
-                        ],
+                            SizedBox(height: 16),
+                            Container(
+                              margin: EdgeInsets.symmetric(vertical: 8),
+                              child: TextFormField(
+                                controller: addressController,
+                                decoration: InputDecoration(
+                                  labelText: 'Address',
+                                  hintText: 'Address',
+                                  border: OutlineInputBorder(),
+                                  errorText: addressError,
+                                ),
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Address is Required';
+                                  }
+                                  return null; // Return null if the input is valid
+                                },
+                              ),
+                            ),
+                            SizedBox(height: 16),
+                            Container(
+                              margin: EdgeInsets.symmetric(vertical: 8),
+                              child: TextFormField(
+                                controller: phoneNumberController,
+                                decoration: InputDecoration(
+                                  labelText: 'Phone Number (optional)',
+                                  hintText: 'Phone Number (optional)',
+                                  border: OutlineInputBorder(),
+                                ),
+                                validator: (value) {
+                                  if (value != null && value.isNotEmpty) {
+                                    // If a value is entered, validate it as a mobile number
+                                    if (!isValidPhoneNumber(value)) {
+                                      return 'Invalid phone number format';
+                                    }
+                                  }
+                                  // Return null if the input is either empty or a valid mobile number
+                                  return null;
+                                },
+                              ),
+                            ),
+                            SizedBox(height: 16),
+                          ],
+                        ),
                       ),
                     if (_currentSegmentIndex == 1)
                       Column(
