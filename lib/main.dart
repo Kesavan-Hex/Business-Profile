@@ -90,15 +90,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   BusinessProfile businessProfile = BusinessProfile();
 
-  @override
-  void dispose() {
-    businessNameController.dispose();
-    webURLController.dispose();
-    addressController.dispose();
-    phoneNumberController.dispose();
-    super.dispose();
-  }
-
   void _validateFields() {
     setState(() {
       businessNameError = businessNameController.text.isEmpty
