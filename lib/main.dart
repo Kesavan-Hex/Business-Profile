@@ -90,35 +90,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   BusinessProfile businessProfile = BusinessProfile();
 
-  void _validateFields() {
-    setState(() {
-      businessNameError = businessNameController.text.isEmpty
-          ? 'Business Name is required'
-          : null;
-
-      final webURL = webURLController.text;
-      webURLError = webURL.isEmpty
-          ? 'Web URL is required'
-          : (!webURL.contains('.'))
-              ? 'Invalid URL format'
-              : null;
-
-      addressError =
-          addressController.text.isEmpty ? 'Address is required' : null;
-
-      final phoneNumber = phoneNumberController.text;
-      if (phoneNumber.isNotEmpty) {
-        if (!isValidPhoneNumber(phoneNumber)) {
-          phoneNumberController.text = '';
-        }
-      }
-    });
-
-    if (_formKey.currentState!.validate()) {
-      print('Data can be saved');
-    }
-  }
-
   bool isValidPhoneNumber(String phoneNumber) {
     final RegExp phoneRegex = RegExp(r'^[0-9]+$');
     return phoneRegex.hasMatch(phoneNumber);
