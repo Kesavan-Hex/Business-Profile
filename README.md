@@ -8,7 +8,6 @@ Simple App That Uses segmented screen and image picker and conver user input int
 
 ## Screenshots
 
-<img src="screenshot/photo_2023-09-28_15-51-33.jpg" width="400" height="900">
 <img src="screenshot/photo_2023-09-28_15-51-44.jpg" width="400" height="900">
 <img src="screenshot/photo_2023-09-28_15-51-52.jpg" width="400" height="900">
 <img src="screenshot/photo_2023-09-28_15-51-56.jpg" width="400" height="900">
@@ -19,7 +18,7 @@ Simple App That Uses segmented screen and image picker and conver user input int
 
 ```shell
 # Clone the repository
-git clone https://github.com/your-username/your-repo.git](https://github.com/Kesavan-Hex/Swazei-Task.git
+git clone https://github.com/Kesavan-Hex/Swazei-Task.git
 
 # Navigate to the project directory
 
